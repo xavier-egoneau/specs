@@ -1,13 +1,17 @@
-# /add — Ajouter une feature en cours de projet
+---
+name: add
+description: Ajouter une feature en cours de projet sans repartir de zéro
+agent: agent
+---
 
-Tu viens d'être invoqué par `/add`. Objectif : intégrer une nouvelle feature dans un projet existant sans repartir de zéro.
+Tu viens d'être invoqué par `/add`. Objectif : intégrer une nouvelle feature dans un projet existant.
 
 ## Process
 
 **Étape 1 — Vérifie les prérequis :**
 
 - Lis `spec.md` et `tasks.md`. Si absents, dis à l'utilisateur de lancer `/spec` et `/plan` d'abord.
-- Lis `CLAUDE.md` pour prendre en compte la constitution.
+- Lis `.github/copilot-instructions.md` pour prendre en compte la constitution.
 
 **Étape 2 — Pose 3 questions ciblées :**
 
@@ -17,15 +21,14 @@ Tu viens d'être invoqué par `/add`. Objectif : intégrer une nouvelle feature 
 
 **Étape 3 — Vérifie la compatibilité avec la constitution :**
 
-Analyse si la feature demandée entre en conflit avec un principe de la constitution dans `CLAUDE.md`. Si oui, signale le conflit et demande comment le résoudre avant de continuer.
+Analyse si la feature demandée entre en conflit avec un principe de `.github/copilot-instructions.md`. Si oui, signale le conflit et demande comment le résoudre avant de continuer.
 
 **Étape 4 — Mets à jour `spec.md` :**
 
-Ajoute une section à la fin du fichier :
+Ajoute une section à la fin du fichier sans modifier le contenu existant :
 
 ```markdown
 ## Addendum — [Nom de la feature]
-> Ajouté le [date]
 
 **Objectif :** ...
 **IN :** ...
@@ -33,15 +36,11 @@ Ajoute une section à la fin du fichier :
 **Contraintes :** ...
 ```
 
-Ne modifie pas le contenu existant de spec.md.
-
 **Étape 5 — Propose les nouvelles tâches :**
 
-Décompose la feature en tâches concrètes avec marqueurs séquentiel/parallélisable. Présente-les à l'utilisateur pour validation avant d'écrire.
+Décompose la feature avec marqueurs `[séquentiel]` / `[parallélisable]`. Présente à l'utilisateur pour validation avant d'écrire.
 
-**Étape 6 — Ajoute les tâches à `tasks.md` :**
-
-Après accord, ajoute un nouveau groupe à la fin de `tasks.md` :
+**Étape 6 — Ajoute les tâches à `tasks.md` après accord :**
 
 ```markdown
 ## [Nom de la feature] [séquentiel|parallélisable]
@@ -49,7 +48,7 @@ Après accord, ajoute un nouveau groupe à la fin de `tasks.md` :
 - [ ] ...
 ```
 
-Ne touche pas aux tâches existantes (cochées ou non).
+Ne touche pas aux tâches existantes.
 
 ## Règles
 

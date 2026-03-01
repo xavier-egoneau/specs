@@ -1,4 +1,8 @@
-# /spec — Spécification du projet
+---
+name: spec
+description: Spécification du projet — pose 6 questions et génère spec.md + copilot-instructions.md
+agent: agent
+---
 
 Tu viens d'être invoqué par `/spec`. Objectif : comprendre le projet avant toute ligne de code.
 
@@ -35,9 +39,9 @@ Tu viens d'être invoqué par `/spec`. Objectif : comprendre le projet avant tou
 ...
 ```
 
-**Étape 3 — Crée ou met à jour `CLAUDE.md` à la racine avec une section `## Constitution` :**
+**Étape 3 — Crée ou met à jour `.github/copilot-instructions.md` avec une section `## Constitution` :**
 
-Extrais de spec.md 3 à 5 principes non-négociables pour ce projet (ex: "pas de backend", "mobile-first", "données en localStorage uniquement"). Format :
+Extrais 3 à 5 principes non-négociables formulés en impératif. Format :
 
 ```markdown
 ## Constitution
@@ -49,7 +53,7 @@ Principes non-négociables pour ce projet :
 
 ## Contexte projet
 
-- Lis toujours `tasks.md` s'il existe au début de la session
+- Lis toujours `tasks.md` s'il existe
 - Après chaque tâche complétée, coche-la dans `tasks.md` immédiatement
 - Respecte la constitution ci-dessus à chaque implémentation
 - Commande de tests : [réponse à la question 6, ou "aucun"]
@@ -58,4 +62,4 @@ Principes non-négociables pour ce projet :
 ## Règles
 
 - Ne planifie pas, ne code pas. `/plan` vient ensuite.
-- Si spec.md existe déjà, propose de le mettre à jour plutôt que de l'écraser.
+- Si `spec.md` existe déjà, propose de le mettre à jour plutôt que de l'écraser.

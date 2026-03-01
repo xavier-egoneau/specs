@@ -1,16 +1,25 @@
 # Workflow spec → plan → dev
 
-Cinq skills pour structurer un projet sans overhead documentaire inutile.
+Cinq commandes pour structurer un projet sans overhead documentaire inutile. Disponible pour **Claude Code** et **GitHub Copilot**.
 
 ---
 
 ## Installation
 
-Copie le dossier `.claude/skills/` à la racine de ton projet.
+### Claude Code
+Copie le dossier `.claude/` à la racine de ton projet.
+Les commandes sont dans `.claude/commands/` et s'invoquent avec `/nom`.
+
+### GitHub Copilot
+Copie le dossier `.github/` à la racine de ton projet.
+Les prompts sont dans `.github/prompts/` et s'invoquent avec `/nom` dans le chat Copilot.
+(Fonctionnalité en public preview — nécessite VS Code avec GitHub Copilot)
 
 ---
 
 ## Commandes
+
+Les deux versions s'invoquent de la même façon : `/spec`, `/plan`, `/dev`, `/resume`, `/add`.
 
 ### `/spec` — Spécification
 
@@ -26,7 +35,7 @@ Pose 6 questions :
 
 **Produit :**
 - `spec.md` — la spécification du projet
-- `CLAUDE.md` — constitution + commande de tests + instruction de charger `tasks.md` automatiquement
+- `CLAUDE.md` ou `.github/copilot-instructions.md` — constitution + commande de tests
 
 ---
 
@@ -34,10 +43,10 @@ Pose 6 questions :
 
 Lance après `/spec`. Nécessite `spec.md`.
 
-Lit `spec.md`, analyse les dépendances entre tâches et propose une décomposition. Chaque groupe est marqué `[séquentiel]` ou `[parallélisable]`. Valide avec toi avant d'écrire.
+Analyse les dépendances, propose une décomposition en groupes `[séquentiel]` / `[parallélisable]`. Valide avec toi avant d'écrire.
 
 **Produit :**
-- `tasks.md` — tâches avec checkboxes, groupées, ordonnées et marquées
+- `tasks.md` — tâches avec checkboxes, groupées et marquées
 
 ---
 
@@ -45,35 +54,38 @@ Lit `spec.md`, analyse les dépendances entre tâches et propose une décomposit
 
 Lance après `/plan`. Nécessite `tasks.md`.
 
-Pour chaque groupe :
-- `[séquentiel]` → une tâche à la fois avec checkpoint constitution + tests
-- `[parallélisable]` → un agent `coder` par tâche en parallèle, tests après merge
+Cite la constitution avant chaque tâche, implémente, vérifie, lance les tests. La tâche n'est cochée que si constitution respectée **et** tests verts.
 
-La tâche n'est cochée que si la constitution est respectée **et** les tests passent.
+| | Claude Code | Copilot |
+|---|---|---|
+| Groupes `[parallélisable]` | Agents en parallèle | Séquentiel |
 
 ---
 
 ### `/resume` — Reprendre une session
 
-Lance en début de session sur un projet existant (après `/clear` ou nouvelle session).
+Lance en début de session sur un projet existant.
 
-Lit `spec.md`, `tasks.md` et `CLAUDE.md`, produit un résumé d'état et indique la prochaine action. Ne modifie aucun fichier.
+Lit `spec.md`, `tasks.md` et le fichier de constitution, produit un résumé d'état et indique la prochaine action. Ne modifie aucun fichier.
 
 ---
 
 ### `/add` — Ajouter une feature
 
-Lance pour ajouter une feature à un projet en cours, sans repartir de zéro.
+Lance pour étendre un projet en cours, sans repartir de zéro.
 
-Pose 3 questions ciblées, vérifie la compatibilité avec la constitution, met à jour `spec.md` (addendum) et ajoute des tâches à la fin de `tasks.md` sans toucher à l'existant.
+Pose 3 questions ciblées, vérifie la compatibilité avec la constitution, ajoute un addendum à `spec.md` et de nouvelles tâches à la fin de `tasks.md` sans toucher à l'existant.
 
 ---
 
 ## Constitution — comment ça marche
 
-`/spec` génère une section `## Constitution` dans `CLAUDE.md` avec les principes formulés en impératif (`JAMAIS de backend`, `TOUJOURS localStorage`, etc.).
+`/spec` génère les principes non-négociables du projet en impératif (`JAMAIS de backend`, `TOUJOURS localStorage`...) dans le fichier de constitution :
 
-Ce fichier est chargé automatiquement par Claude à chaque session. `/dev` est forcé de citer les principes applicables **avant chaque tâche** et de vérifier leur respect **après** — checkpoint actif, pas suggestion passive.
+- **Claude Code** → `CLAUDE.md` (chargé automatiquement à chaque session)
+- **Copilot** → `.github/copilot-instructions.md` (chargé automatiquement dans tous les chats)
+
+`/dev` cite les principes applicables **avant chaque tâche** et vérifie leur respect **après** — checkpoint actif, pas suggestion passive.
 
 ---
 
@@ -93,10 +105,8 @@ Ce fichier est chargé automatiquement par Claude à chaque session. `/dev` est 
 
 ```
 projet/
-├── CLAUDE.md       ← constitution + commande tests + auto-chargement tasks.md
-├── spec.md         ← spécification (mise à jour par /add)
-└── tasks.md        ← tâches avec état ([ ] / [x]) et marqueurs séquentiel/parallélisable
+├── CLAUDE.md                          ← constitution Claude Code (auto-chargé)
+├── .github/copilot-instructions.md    ← constitution Copilot (auto-chargé)
+├── spec.md                            ← spécification (enrichie par /add)
+└── tasks.md                           ← tâches [ ] / [x] avec marqueurs
 ```
-
-`spec.md` et `tasks.md` sont versionnables dans le repo.
-`CLAUDE.md` l'est aussi — il sert de mémoire partagée si le projet est multi-devs.
