@@ -126,3 +126,4 @@ projet/
 ├── context.md                     ← US en cours (écrasé à chaque /add)
 └── tasks.md                       ← tâches [ ] / [x] (écrasé à chaque /plan)
 ```
+
