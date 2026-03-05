@@ -10,8 +10,10 @@ Tu viens d'être invoqué par `/dev`. Objectif : implémenter les tâches dans l
 
 **Étape 1 — Vérifie les prérequis :**
 
-- Lis `tasks.md` (#file:tasks.md). Si absent, dis à l'utilisateur de lancer `/plan` d'abord et arrête-toi.
-- Lis `.github/copilot-instructions.md` pour prendre en compte la constitution et la commande de tests.
+- Lis `tasks.md`. Si absent, dis à l'utilisateur de lancer `/plan` d'abord et arrête-toi.
+- Lis `.github/copilot-instructions.md` — constitution et règles non-négociables.
+- Lis `spec.md` — architecture du projet, stack, patterns existants.
+- Lis `context.md` si présent — périmètre de l'US en cours (prend le dessus sur `spec.md` pour le scope).
 
 **Étape 2 — Pour chaque tâche, applique ce cycle sans exception :**
 

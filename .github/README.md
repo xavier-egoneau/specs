@@ -37,12 +37,12 @@ Pose 6 questions :
 
 ### `/plan` — Planification
 
-Lance après `/spec`. Nécessite `spec.md`.
+Lance après `/spec` ou `/add`. Lit `context.md` si présent (sinon `spec.md`).
 
 Analyse les dépendances, propose une décomposition en groupes `[séquentiel]` / `[parallélisable]`. Valide avec toi avant d'écrire.
 
 **Produit :**
-- `tasks.md` — tâches avec checkboxes, groupées et marquées
+- `tasks.md` — tâches avec checkboxes, groupées et marquées (écrasé à chaque appel)
 
 > Note : les groupes `[parallélisable]` sont traités **séquentiellement** dans cette version (Copilot ne supporte pas les agents parallèles).
 
@@ -69,11 +69,11 @@ Lit `spec.md`, `tasks.md` et `copilot-instructions.md`, produit un résumé d'é
 
 ---
 
-### `/add` — Ajouter une feature
+### `/add` — Ajouter une feature / démarrer une US
 
-Lance pour étendre un projet en cours, sans repartir de zéro.
+Lance pour travailler sur une nouvelle US ou feature dans un projet existant.
 
-Pose 3 questions ciblées, vérifie la compatibilité avec la constitution, ajoute un addendum à `spec.md` et de nouvelles tâches à la fin de `tasks.md` sans toucher à l'existant.
+Pose 3 questions ciblées, vérifie la compatibilité avec la constitution, écrit `context.md` — la spec de l'US en cours. Ne touche pas à `spec.md`.
 
 ---
 
@@ -103,7 +103,7 @@ Ce fichier est **chargé automatiquement par Copilot dans tous les chats** — l
 |-----------|----------|
 | Nouveau projet | `/spec` → `/plan` → `/dev` |
 | Nouvelle session sur projet existant | `/resume` |
-| Nouvelle feature mid-project | `/add` → `/dev` |
+| Nouvelle US / feature mid-project | `/add` → `/plan` → `/dev` |
 | Périmètre flou | `/spec` obligatoire |
 | Tâche isolée et claire | `/dev` directement |
 
@@ -122,6 +122,7 @@ projet/
 │   │   ├── resume.prompt.md
 │   │   └── add.prompt.md
 │   └── README.md                  ← cette doc
-├── spec.md                        ← spécification (enrichie par /add)
-└── tasks.md                       ← tâches [ ] / [x] avec marqueurs
+├── spec.md                        ← spécification globale du projet
+├── context.md                     ← US en cours (écrasé à chaque /add)
+└── tasks.md                       ← tâches [ ] / [x] (écrasé à chaque /plan)
 ```

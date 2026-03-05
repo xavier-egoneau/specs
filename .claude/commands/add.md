@@ -19,40 +19,25 @@ Tu viens d'être invoqué par `/add`. Objectif : intégrer une nouvelle feature 
 
 Analyse si la feature demandée entre en conflit avec un principe de la constitution dans `CLAUDE.md`. Si oui, signale le conflit et demande comment le résoudre avant de continuer.
 
-**Étape 4 — Mets à jour `spec.md` :**
+**Étape 4 — Écris `context.md` à la racine :**
 
-Ajoute une section à la fin du fichier :
+Ce fichier remplace tout `context.md` existant — il représente l'US en cours, pas une accumulation.
 
 ```markdown
-## Addendum — [Nom de la feature]
-> Ajouté le [date]
+# Context — [Nom de la feature / US]
 
 **Objectif :** ...
 **IN :** ...
 **OUT :** ...
-**Contraintes :** ...
+**Contraintes spécifiques :** ...
+**Critères d'acceptance :** ...
 ```
 
-Ne modifie pas le contenu existant de spec.md.
-
-**Étape 5 — Propose les nouvelles tâches :**
-
-Décompose la feature en tâches concrètes avec marqueurs séquentiel/parallélisable. Présente-les à l'utilisateur pour validation avant d'écrire.
-
-**Étape 6 — Ajoute les tâches à `tasks.md` :**
-
-Après accord, ajoute un nouveau groupe à la fin de `tasks.md` :
-
-```markdown
-## [Nom de la feature] [séquentiel|parallélisable]
-- [ ] ...
-- [ ] ...
-```
-
-Ne touche pas aux tâches existantes (cochées ou non).
+Ne modifie pas `spec.md`.
 
 ## Règles
 
-- Ne commence pas à implémenter — `/dev` vient ensuite
-- Ne modifie jamais les tâches déjà présentes dans `tasks.md`
+- Ne commence pas à implémenter — lance `/plan` puis `/dev` ensuite
+- Ne touche jamais à `spec.md` — la constitution reste dans `CLAUDE.md`
+- `context.md` est écrasé à chaque `/add` — il représente toujours l'US active
 - Si la feature contredit la constitution, bloque et demande une décision explicite

@@ -6,8 +6,11 @@ Tu viens d'être invoqué par `/plan`. Objectif : décomposer le projet en tâch
 
 **Étape 1 — Vérifie les prérequis :**
 
-- Lis `spec.md` s'il existe. Sinon, dis à l'utilisateur de lancer `/spec` d'abord et arrête-toi.
 - Lis `CLAUDE.md` pour prendre en compte la constitution.
+- Lis `context.md` s'il existe — il définit le périmètre de l'US en cours.
+- Sinon, lis `spec.md`. Si absent également, dis à l'utilisateur de lancer `/spec` d'abord et arrête-toi.
+
+> Priorité de lecture : `context.md` > `spec.md`. Si `context.md` est présent, c'est lui qui délimite le périmètre à planifier.
 
 **Étape 2 — Analyse les dépendances entre tâches :**
 
@@ -52,4 +55,4 @@ Pour chaque groupe de tâches, détermine :
 ## Règles
 
 - Ne commence pas à implémenter. `/dev` vient ensuite.
-- Si `tasks.md` existe déjà, propose de le remplacer ou de l'enrichir.
+- `tasks.md` est toujours écrasé — chaque `/plan` repart de zéro pour l'US en cours.
