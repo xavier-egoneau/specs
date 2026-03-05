@@ -101,12 +101,33 @@ Pose 3 questions ciblées, vérifie la compatibilité avec la constitution, ajou
 
 ---
 
-## Fichiers générés
+## Fichiers du workflow
 
 ```
 projet/
+├── .claude/                           ← Claude Code
+│   ├── commands/
+│   │   ├── spec.md
+│   │   ├── plan.md
+│   │   ├── dev.md
+│   │   ├── resume.md
+│   │   └── add.md
+│   └── README.md
+├── .github/                           ← GitHub Copilot
+│   ├── copilot-instructions.md
+│   ├── prompts/
+│   │   ├── spec.prompt.md
+│   │   ├── plan.prompt.md
+│   │   ├── dev.prompt.md
+│   │   ├── resume.prompt.md
+│   │   └── add.prompt.md
+│   └── README.md
+│
+│   — fichiers générés par les commandes —
+│
 ├── CLAUDE.md                          ← constitution Claude Code (auto-chargé)
-├── .github/copilot-instructions.md    ← constitution Copilot (auto-chargé)
 ├── spec.md                            ← spécification (enrichie par /add)
 └── tasks.md                           ← tâches [ ] / [x] avec marqueurs
 ```
+
+> La version Copilot génère `.github/copilot-instructions.md` à la place de `CLAUDE.md`.
